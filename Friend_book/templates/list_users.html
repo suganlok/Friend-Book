@@ -1,0 +1,16 @@
+{% load static%}
+
+
+
+{% block content %}
+  <h2>List of Users</h2>
+  <ul>
+    {% for user in all_users %}
+      <li>
+        <!--<a href="{% url 'message_detail' user.id %}"  class="user-link">-->
+          {{ user.username }}
+        
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

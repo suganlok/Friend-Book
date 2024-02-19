@@ -1,0 +1,59 @@
+{% load static %}
+
+<!--{% for message in messages %}
+    <div>
+        <strong>{{ message.sender.username }}</strong>
+        <p>{{ message.content }}</p>
+    </div>
+{% endfor %}
+
+<form method="post" action="{% url 'message_detail' user_id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send Message</button>
+</form>
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'your_custom_styles.css' %}">
+    <title>Chat Window</title>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        {% for message in messages %}
+            <div class="{% if message.sender == request.user %}text-right{% else %}text-left{% endif %} mb-3">
+                <strong>{{ message.sender.username }}</strong>
+                <p class="bg-light p-2 rounded">{{ message.content }}</p>
+
+                <!--<strong>{{ message.receiver.username }}</strong>
+                <p class="bg-light p-2 rounded">{{ message.content }}</p>-->
+
+            </div>
+        {% endfor %}
+
+        <form method="post" action="{% url 'message_detail' user_id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+            </div>
+
+    <!-- Bootstrap JS and other scripts if needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
